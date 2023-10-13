@@ -1,0 +1,78 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {"url": "https://raw.githubusercontent.com/AnneMoz2/Datavis2/main/tree%20cover%20loss%20vs%20burnt%20area.csv"},
+  
+  "vconcat": [
+    
+    {
+    "width": 350,
+    "height":120,
+    "layer":[
+  {
+    "mark": "area",
+    "encoding": {
+      "x": {
+        "field": "year",
+        "type": "temporal",
+        "scale": {"domain": {"param": "brush"}},
+        "axis": {"title": "","grid":false}},
+
+      "y": {"field": "burned area ", "type": "quantitative", "title":"Burned area (Mha)"},
+      "color":{"value":"#5f0f40"},
+      "tooltip":[
+        {"field":"year","type":"temporal","title":"Year"},
+        {"field": "burned area ", "type": "quantitative", "title": "Burned Area (Mha)"}]}
+      },
+    {
+      "mark":"text",
+      "encoding":{
+      "text":{"value":"The highest burned area was recorded in 2001"},
+      "x": {"value": 125},
+      "y": {"value": 10},
+      "fontSize": {"value": 10},
+      "align": {"value": "left"},
+      "baseline": {"value": "middle"},
+      "color": {"value": "black"}}    
+  }]},
+  {
+    "width": 350,
+    "height": 80,
+    "layer":[
+      {
+    "mark": "area",
+    "params": [{
+      "name": "brush",
+      "select": {"type": "interval", "encodings": ["x"]}
+    }],
+    "encoding": {
+      "x": {
+        "field": "year",
+        "type": "temporal",
+        "axis":{"grid":false},
+        "title":"Year"
+      },
+      "y": {
+        "field": "tree cover loss",
+        "type": "quantitative",
+        "title":"Tree cover loss (Mha)",
+        "axis": {"tickCount": 3}  
+        
+      },
+      
+      "color":{"value":"#0f4c5c"},
+      "tooltip":[
+        {"field":"year","type":"temporal","title":"Year"},
+        {"field": "tree cover loss", "type": "quantitative", "title": "Tree cover loss (Mha)"}]}},
+ {
+  "mark":"text",
+  "encoding":{
+  "text":{"value":"The highest loss of tree cover was between 2018 and 2021"},
+  "x": {"value": 150},
+  "y": {"value": 20},
+  "fontSize": {"value": 10},
+  "align": {"value": "left"},
+  "baseline": {"value": "middle"},
+  "color": {"value": "black"}}    
+}
+  ]}]}

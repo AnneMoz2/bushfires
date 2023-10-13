@@ -1,0 +1,57 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "background":"white",
+    "width": 800,
+    "height": 450,
+    "title": "Bushfires in Australia from the year 2000 to the present",
+    "projection": {"type": "mercator"},
+    "layer": [
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/AnneMoz2/DataVisualizationBlazing/main/ne_110m%20(3).json",
+                "format": {"type": "topojson", "feature":"ne_110m_admin_0_countries"}
+            },
+            "mark": {"type": "geoshape", "fill": "#f7f7f7", "stroke": "lightgray"}
+        },
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/AnneMoz2/3179-week-9/main/viirs-snpp_2021_Australia.csv"
+            },
+            "mark": {"type": "point", "tooltip": true},
+            "transform": [
+                {
+                    "calculate": "datum.daynight === 'D' ? 'Day' : 'Night'",
+                    "as": "daynight"
+                }
+            ],
+            "encoding": {
+                "longitude": {"field": "longitude", "type": "quantitative"},
+                "latitude": {"field": "latitude", "type": "quantitative"},
+                "size": {
+                    "field": "frp",
+                    "type": "quantitative",
+                    "title": "Fire Radiative Power (MW)"
+                },
+                "color": {
+                    "field": "frp",
+                    "type": "quantitative",
+                    "title": "Fire Radiative Power (MW)",
+                    "scale": {"scheme": "orangered"}
+                },
+                "tooltip": [
+                    {"field": "frp", "type": "quantitative", "title": "Fire Radiative Power"},
+                    {"field": "daynight", "type": "nominal", "title": "Time of Day"}
+                ],
+                "selection": {
+                    "nightDayFilter": {
+                        "type": "single",
+                        "fields": ["daynight"],
+                        "init": {"daynight": "Day"},
+                        "bind": {"input": "radio"}
+                    }
+                },
+                "config": { "view": { "stroke": "transparent" }, "axis": { "grid": false } }
+            }
+        }
+    ]
+}

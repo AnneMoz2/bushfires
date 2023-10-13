@@ -1,0 +1,68 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  
+  "data": { "url": "https://raw.githubusercontent.com/AnneMoz2/Finalversion/main/houselife.csv"},
+  "transform": [
+    {"calculate": "datum.type == 2 ? 'lives lost' : 'houses lost'", "as": "kind"}
+  ],
+  "spacing": 0,
+  "hconcat": [{
+    "transform": [{
+      "filter": {"field": "kind", "equal": "lives lost"}
+    }],
+    "title": "Lives lost",
+    "mark": "bar",
+    
+    "encoding": {
+      "y": {
+        "field": "state", "axis": null,"sort":"descending"
+      },
+      "x": {
+        "aggregate": "sum", "field": "number",
+        "title": "number of lives lost",
+        "axis": {"format": "s"}
+      },
+      "color": {
+        "field": "kind",
+        "scale": {"range": ["#675193", "#ca8861"]},
+        "legend": null
+      }
+    }
+  }, {
+    "width": 20,
+    "view": {"stroke": null},
+    "mark": {
+      "type": "text",
+      "align": "center"
+    },
+    "encoding": {
+      "y": {"field": "state", "type": "nominal", "axis": null,"sort":"descending"},
+      "text": {"field": "state", "type": "nominal"}
+    }
+  }, {
+    "transform": [{
+      "filter": {"field": "kind", "equal": "houses lost"}
+    }],
+    "title": "Houses lost",
+    "mark": "bar",
+    "encoding": {
+      "y": {
+        "field": "state", "title": null,
+        "axis": null
+      },
+      "x": {
+        "aggregate": "sum", "field": "number",
+        "title": "number of houses lost",
+        "axis": {"format": "s"}
+      },
+      "color": {
+        "field": "kind",
+        "legend": null
+      }
+    }
+  }],
+  "config": {
+    "view": {"stroke": null},
+    "axis": {"grid": false}
+  }
+}

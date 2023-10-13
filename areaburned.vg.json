@@ -1,0 +1,92 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "height":200,
+  "width":"275",
+  "data": {
+    "url": "https://raw.githubusercontent.com/AnneMoz2/Datavis2/main/state%20area%20burned.csv",
+    "format": {"type": "csv"}
+  },
+  "transform": [
+    {
+      "aggregate": [
+        {"op": "sum", "field": "Native forest", "as": "Native Forest"},
+        {"op": "sum", "field": "Commercial plantation", "as": "Commercial Plantation"},
+        {"op": "sum", "field": "Other forest", "as": "Other Forest"}
+      ],
+      "groupby": ["State"]
+    },
+    {
+      "fold": ["Native Forest", "Commercial Plantation", "Other Forest"],
+      "as": ["Type of Forest", "Area Burned"]
+    },
+    {
+      "argmax": "Area Burned",
+      "field": "State",
+      "as": "MaxState"
+    }
+ ],
+  "layer":[{
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "State",
+      "type": "nominal",
+      "title": "State"
+    },
+    "y": {
+      "field": "Area Burned",
+      "type": "quantitative",
+      "title": "Total Area Burned ('000 hectares)"
+    },
+    
+    
+    "color": {
+      "field": "Type of Forest",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Native Forest", "Commercial Plantation", "Other Forest"],
+        "range": ["#9a031e","#0f4c5c","#fb8b24"]
+      },
+      "title": "Type of Forest:"
+    },
+    "opacity": {
+      "condition": {
+        "selection": "ForestFilter",
+        "value": 1
+      },
+      "value": 0.7  
+    },
+    
+    "tooltip":[
+      {"field": "Type of Forest", "title": "Forest Type"},
+      {"field": "Area Burned", "title": "Area Burned"}
+    ]
+  }
+},
+{
+  "mark":"text",
+  "selection": {
+    "ForestFilter": {
+      "type": "single",
+      "fields": ["Type of Forest"],
+      "init": {"Type of Forest": "All"},
+      "bind": {
+        "input": "select",
+        "options": ["All", "Native Forest", "Commercial Plantation", "Other Forest"],
+        "name":"Type of forest: "
+      }
+    }
+  },
+  "encoding": {
+    "text": {"value": "Queensland records the highest burned forest area"},
+    "x": {"value": 120},
+    "y": {"value": 7},
+    "fontSize": {"value": 10},
+    "align": {"value": "left"},
+    "baseline": {"value": "middle"},
+    "color": {"value": "black"}
+}
+}
+  ]
+}

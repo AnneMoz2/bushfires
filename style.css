@@ -1,0 +1,74 @@
+
+body *{
+    font-family: "sans-serif";
+}
+h1 {
+    font-family: "sans-serif";
+    color: rgb(113, 13, 13);
+    text-align: center;
+    font-weight:bolder;
+}
+body{
+    
+    background-color:lightgrey;
+}
+h2{
+    font-family: "sans-serif";
+    color:rgb(113, 13, 13);
+    text-align: left;
+}
+
+.center {
+    justify-content: center;
+}
+
+.page{
+    width: 1000px;
+    height: auto;
+    background-color: white;
+    margin:auto;
+    padding: 50px;
+    padding-top: 35px;
+    font-family: "sans-serif";
+}
+.vis-container1 {
+    width: 300%;
+    height: 500%;
+    padding: 50px;
+    border-color: white;
+    
+}
+.vis-container2 {
+    width: 5px;
+    height: 10px;
+    padding: 20px;
+    justify-self: center;
+  
+    
+}
+.vis-container3 {
+    width: 5px;
+    height: 50px;
+    padding: 50px;
+    border-color: white;
+    
+}
+.description h2,
+h1 {
+    margin-top: 0px;
+}
+.center-heading{
+    font-family: "sans-serif";
+    text-align:center;
+    color: rgb(113, 13, 13);
+    font-size:xx-large;
+
+}
+.description-left {
+    color: black;
+    font-family: "sans-serif";
+    padding: 20px;
+    text-align: justify;
+    
+    
+}

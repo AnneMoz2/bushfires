@@ -1,0 +1,39 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "A simple donut chart with embedded data.",
+    "data": {
+      "url": "https://raw.githubusercontent.com/AnneMoz2/Datavis2/main/Data%20-%20cause.csv",
+      "format":{"type": "csv"}
+    },
+    "layer":[
+    {
+    "mark": {"type": "arc", "innerRadius": 50},
+     "config": {"view": {"stroke": null}, "axis": {"grid": false}},
+    "encoding": {
+      "theta": {"field": "Percentage ", "type": "quantitative"},
+      "color": {"field": "Cause", "type": "nominal", "title":"Causes",
+      "scale":{
+        
+        "range":["#E69F00","#F0E442","#0a9396","#EAE2B7","#fc8d59","#003049"]
+        
+      }
+      },
+      "tooltip":[
+        {"field":"Cause","type":"nominal","title":"Cause:"},
+        {"field": "Percentage ", "type": "quantitative", "title": "Percentage (%)"}
+        
+        ]
+      }
+    },
+    {
+      "mark":"text",
+      "encoding":{
+      "text":{"value":"Causes of Bushfires"},
+      "x": {"value": 100},
+      "y": {"value": 95},
+      "fontSize": {"value": 10},
+      "align": {"value": "left"},
+      "baseline": {"value": "middle"},
+      "color": {"value": "black"}}    
+    }]
+  }
